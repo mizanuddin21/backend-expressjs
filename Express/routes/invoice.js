@@ -318,9 +318,6 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
         let errorData = []
         let successData = []
 
-        
-        
-
         //check header contained in sheet 1
         for (let header of newHeader) {
             if (![
@@ -363,8 +360,6 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
             }, {})
         })
 
-        console.log('111', output1)
-
         //Extract all the data from sheet 2
         const rowsData2 = jsonData2.map(item => {
             const key = Object.keys(item)[0] // Get the key (header part before ":")
@@ -384,8 +379,6 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
             return obj
             }, {})
         })
-
-        console.log('222', output2)
 
         //insert data invoice into db
         for (let invoice of output1){
@@ -432,57 +425,6 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
             success : successData
         })
 
-        // //insert data product into db
-        // for (let product of output2){
-        //     console.log('walawe', invoice)           
-        //     //query to table invoice
-        //     const productData = await db('products')
-        //     .select('*')
-        //     .where('invoice_no', invoice.invoice_no)
-        //     if (invoiceData.length != 0){
-        //         return res.status(422).json({ status: 'error', message: 'Invoice already exist in database.' })
-        //     } else {
-        //         await db('invoice')
-        //         .insert({
-        //             item_name: 'NVIDIA RTX 3050Ti',
-        //             quantity: '1',
-        //             total_cost_of_goods_sold: '17000000',
-        //             total_price_sold:
-        //         })
-        //     }
-        // }
-
-        // const result = await db('invoice')
-        // .insert({
-        //     invoice_no,
-        //     date,
-        //     customer_name,
-        //     salesperson_name,
-        //     payment_type,
-        //     notes,
-        //     product_id
-        // })
-        // console.log(result)
-        // Check if the insertion was successful
-        // if (result) {
-        //     res.status(201).send(`Data successfully inserted for invoice: ${invoice_no}`)
-        // } else {
-        //     res.status(500).json({ error: 'Failed to insert data into the database.' })
-        // }
-
-        // request param successfully validated
-        // const result = "ok" 
-        // // await db('invoice').where('invoice_no' , value.invoice_no).del()
-        // // Check if the deletion was successful
-        // if (result) {
-        //     res.status(200).json({
-        //         message : `Data successfully deleted for invoice no`
-        //     })
-        // } else {
-        //     res.status(500).json({ error: 'Failed to delete data into the database.' })
-        // }
-        // }
-
     } catch(error){
         console.log('error', error)
         res.send(error)
@@ -490,11 +432,3 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
 })
 
 export default router
-
-
-
-            // const totalProfit = invoices.reduce((sum, item) => {
-            //     const priceSold = parseInt(item.total_price_sold, 10); // Convert to integer
-            //     const costOfGoods = parseInt(item.total_cost_of_goods_sold, 10); // Convert to integer
-            //     return sum + (priceSold - costOfGoods); // Add profit of this row to sum
-            //   }, 0)
