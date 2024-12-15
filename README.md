@@ -74,7 +74,19 @@ This will start the Express server. By default, it will be running on http://loc
 
 You can test if everything is working by visiting the endpoint http://localhost:3000 in your browser or using tools like Postman.
 
-5. Feature : Upload file XLSX
+5. API Usage with Postman
+   - Import Postman Collection
+     * Open Postman.
+     * Click on the "Import" button in the top left corner.
+     * Choose postman collection inside folder Postman.
+     * Click "Import" to load the collection into Postman.
+   - Set Up Postman Environment Variables
+     * Go to the "Environment" dropdown in the top-right corner of Postman.
+     * Select "Manage Environments."
+     * Click "Add" to create a new environment and name it (e.g., base_url_widatech).
+   - Run the APIs
+
+6. Feature : Upload file XLSX
 To use this feature , you can use the template given on folder XLSX_template
 
 # Submission
