@@ -25,7 +25,7 @@ Start by cloning the repository to your local machine:
 <div class="code-container">
   <pre id="command-text">
     git clone https://github.com/your-username/your-project-name.git
-    cd your-project-name/express
+    cd your-project-name/Express (The backend codes are inside Express folder)
   </pre>
 </div>
 
