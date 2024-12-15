@@ -76,3 +76,17 @@ You can test if everything is working by visiting the endpoint http://localhost:
 
 5. Feature : Upload file XLSX
 To use this feature , you can use the template given on folder XLSX_template
+
+# Submission
+## Section 1 – Develop a CRUD API for invoice page
+To check the submission for section 1 , codes are inside Express folder.  
+## Section 2 – Import and parse XLSX file to MySQL / PostgresSQL
+To check the submission for section 2, codes are inside Express folder.
+## Section 3 – Problem solving
+To check the submission for section 3, codes are inside Algorithm folder.<br><br>
+To run the code, use your terminal and run command :
+<div class="code-container">
+  <pre id="command-text">
+    node algorithm.js
+  </pre>
+</div>
