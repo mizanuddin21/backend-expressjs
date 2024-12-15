@@ -3,6 +3,7 @@ import Joi from 'joi'
 import db from '../config/database.js'
 import XLSX from 'xlsx'
 import multerUpload from '../services/uploadFile.js'
+import convertExcelDate from '../services/formatDate.js'
 
 const router = express.Router()
 
@@ -20,8 +21,7 @@ router.post('/create', async (req,res) => {
             customer_name: Joi.string().min(2).required(),
             salesperson_name : Joi.string().min(2).required(),
             payment_type: Joi.string().valid('CASH','CREDIT'),
-            notes: Joi.string().min(5),
-            product_id: Joi.number().required()
+            notes: Joi.string().min(5)
           })
           
         /**
@@ -46,8 +46,7 @@ router.post('/create', async (req,res) => {
                 customer_name,
                 salesperson_name,
                 payment_type,
-                notes,
-                product_id
+                notes
             })
             // Check if the insertion was successful
             if (result) {
@@ -103,13 +102,14 @@ router.get('/getData', async (req,res) => {
            
             const data = db('invoice')
             .select('invoice.*', 
+                'products.product_id', 
                 'products.item_name', 
                 'products.quantity',
                 'products.total_price_sold',
                 'products.total_cost_of_goods_sold',
                 db.raw('products.total_price_sold - products.total_cost_of_goods_sold AS profit'),
             )
-            .leftJoin('products', 'products.id', '=', 'invoice.product_id')
+            .leftJoin('products', 'products.invoice_no', '=', 'invoice.invoice_no')
             /**
              * if date are added in the parameter 
              */
@@ -163,19 +163,17 @@ router.get('/getData', async (req,res) => {
 /**
  * invoice API update
  */
-router.put('/update/:id', async (req,res) => {
+router.put('/update/:invoice_no', async (req,res) => {
     try {
         /**
          * first, validate the request body of API
          */
         const schemaReq = Joi.object({
-            invoice_no: Joi.string().min(1).required(),
             date: Joi.date().required(),
             customer_name: Joi.string().min(2).required(),
             salesperson_name : Joi.string().min(2).required(),
             payment_type: Joi.string().valid('CASH','CREDIT'),
-            notes: Joi.string().min(5),
-            product_id: Joi.number().required()
+            notes: Joi.string().min(5)
           })
 
         /**
@@ -189,19 +187,18 @@ router.put('/update/:id', async (req,res) => {
         else {
             // request body successfully validated
             // Extract id from param
-            const id = req.params.id
+            const invoiceNo = req.params.invoice_no
             // Extract validated data from the request body
             const { invoice_no,
                 date,
                 customer_name,
                 salesperson_name,
                 payment_type,
-                notes,
-                product_id} = value
+                notes} = value
             
             
             // check if the invoice number exist or not
-            const getInvoice = await db('invoice').select('*').where('id', id)
+            const getInvoice = await db('invoice').select('*').where('invoice_no', invoiceNo)
             if (getInvoice.length === 0){
                 res.status(404).json({ 
                     status : 'ERROR',
@@ -210,17 +207,15 @@ router.put('/update/:id', async (req,res) => {
             } else {
                 const result = await db('invoice')
                 .update({
-                    invoice_no,
                     date,
                     customer_name,
                     salesperson_name,
                     payment_type,
-                    notes,
-                    product_id
+                    notes
                 })
-                .where({id : id})
+                .where({invoice_no : invoiceNo})
                 
-                const updatedData = await db('invoice').select('*').where('id', id)
+                const updatedData = await db('invoice').select('*').where('invoice_no', invoiceNo)
                 // Check if the insertion was successful
                 if (result) {
                     res.status(200).json({
@@ -270,9 +265,13 @@ router.delete('/delete', async (req,res) => {
                 })
             } else {
                 // request param successfully validated
+
+                /**Delete invoice */
                 const result = await db('invoice').where('invoice_no' , value.invoice_no).del()
                 // Check if the deletion was successful
                 if (result) {
+                    /**Delete product related invoice */
+                    await db('products').where('invoice_no' , value.invoice_no).del()
                     res.status(200).json({
                         status : 'SUCCESS',
                         message : `Data successfully deleted for invoice no. ${value.invoice_no}`
@@ -311,19 +310,21 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
         const jsonData = XLSX.utils.sheet_to_json(sheet) // Convert the sheet to JSON
         const jsonData2 = XLSX.utils.sheet_to_json(sheet2) // Convert the sheet2 to JSON
         const headerData = Object.keys(jsonData[0])
-        const newHeader = JSON.stringify(headerData[0]).replace(/^"|"$/g, '').split(';')
         const headerData2 = Object.keys(jsonData2[0])
-        const newHeader2 = JSON.stringify(headerData2[0]).replace(/^"|"$/g, '').split(';')
+        const newHeader = headerData.map(item => item.replace(/\s+/g, '_'))
+        const newHeader2 = headerData2.map(item => item.replace(/\s+/g, '_'))
         let headersValid = true
         let errorData = []
         let successData = []
-
+        
+        
         //check header contained in sheet 1
         for (let header of newHeader) {
             if (![
-                "invoice_no","date","customer_name", 
-                "salesperson_name", "payment_type",
-                "notes","product_id"].includes(header)) {
+                "invoice_no","date","customer", 
+                "salesperson", "payment_type",
+                "notes"].includes(header)) {
+                    console.log('w3w')
                 headersValid = false
             } else {
             }
@@ -331,58 +332,54 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
         //check header contained in sheet 2
         for (let header2 of newHeader2) {
             if (![
-                "item_name","quantity","total_cost_of_goods_sold","total_price_sold"].includes(header2)) {
+                "Invoice_no","item","quantity","total_cogs","total_price"].includes(header2)) {
+                    console.log('w3w2')
                 headersValid = false
             } else {
             }
         }
+
+       
         if (!headersValid) {
             return res.status(400).json({ status: 'error', message: 'Header file is not complete. Please check again.' })
         }
 
         //Extract all the data from sheet 1
         const rowsData = jsonData.map(item => {
-            const key = Object.keys(item)[0] // Get the key (header part before ":")
-            const value = item[key]          // Get the value (data part after ":")
-            
-            // Split the header and data into arrays
-            const headers = key.split(';')   // Split header string by ";"
-            const rowData = value.split(';') // Split data string by ";"
+
+            const rowData = Object.keys(item).reduce((acc,key) => {
+                // replace space with underscore
+                const newKey = key.replace(/\s+/g, '_')
+                acc[newKey] = item[key]
+                return acc
+            }, {})
             
             return rowData 
         })
-
-        // Map each array to an object using the headers for data1
-        const output1 = rowsData.map(row => {
-            return newHeader.reduce((obj, header, index) => {
-            obj[header] = row[index]
-            return obj
-            }, {})
+        
+        // Convert the date field to YYYY-MM-DD format sheet1
+        rowsData.map(item => {
+            // Convert the Excel date to YYYY-MM-DD format
+            item.date = convertExcelDate(item.date)
+            return item
         })
 
         //Extract all the data from sheet 2
         const rowsData2 = jsonData2.map(item => {
-            const key = Object.keys(item)[0] // Get the key (header part before ":")
-            const value = item[key]          // Get the value (data part after ":")
-            
-            // Split the header and data into arrays
-            const headers = key.split(';')   // Split header string by ";"
-            const rowData = value.split(';') // Split data string by ";"
+            const rowData = Object.keys(item).reduce((acc,key) => {
+                // replace space with underscore
+                const newKey = key.replace(/\s+/g, '_')
+                acc[newKey] = item[key]
+                return acc
+            }, {})
+          
             
             return rowData
         })
-
-        // Map each array to an object using the headers for data2
-        const output2 = rowsData2.map(row => {
-            return newHeader2.reduce((obj, header, index) => {
-            obj[header] = row[index]
-            return obj
-            }, {})
-        })
+       
 
         //insert data invoice into db
-        for (let invoice of output1){
-            console.log('walawe', invoice)           
+        for (let invoice of rowsData){        
             //query to table invoice
             const invoiceData = await db('invoice')
             .select('*')
@@ -390,32 +387,50 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
             if (invoiceData.length != 0){
                 let msg = `Invoice no. ${invoice.invoice_no} already exist in database. Invoice no. duplicated`
                 errorData.push(msg)
-                // return res.status(422).json({ status: 'error', message: `Invoice no. ${invoice.invoice_no} already exist in database.` })
             } else {
-                // check whether the product id is exist in table product or not
-                const productData = await db('products')
-                .select('*')
-                .where('id', invoice.product_id)
-                
-                if (productData.length == 0) {
-                    let msg = `Invoice no. ${invoice.invoice_no} using product id '${invoice.product_id}' that does not exist in table. `
-                    errorData.push(msg)
-                } else {
+                try {
                     await db('invoice')
-                    .insert({
-                        invoice_no : invoice.invoice_no,
-                        date : invoice.date,
-                        customer_name : invoice.customer_name,
-                        salesperson_name : invoice.salesperson_name,
-                        payment_type : invoice.payment_type,
-                        notes : invoice.notes,
-                        product_id : invoice.product_id
-                    })
-                    let msg = `Invoice no. ${invoice.invoice_no} successfully inserted.`
-                    successData.push(msg)
+                        .insert({
+                            invoice_no : invoice.invoice_no,
+                            date : invoice.date,
+                            customer_name : invoice.customer,
+                            salesperson_name : invoice.salesperson,
+                            payment_type : invoice.payment_type,
+                            notes : invoice.notes
+                        })
+
+                        let msg = `Invoice no. ${invoice.invoice_no} successfully inserted.`
+                        successData.push(msg)
+                } catch (error){
+                    // console.log('e',error)
                 }
                 
             }
+        }
+
+        //insert data invoice into db
+        for (let product of rowsData2){ 
+            //query to table invoice
+            const checkInvoice = await db('invoice').select('*').where('invoice_no', product.Invoice_no)
+            if (checkInvoice.length != 0){
+                try {
+                    await db('products')
+                    .insert({
+                        invoice_no : product.Invoice_no,
+                        item_name : product.item,
+                        quantity : product.quantity,
+                        total_cost_of_goods_sold : product.total_cogs,
+                        total_price_sold : product.total_price
+                    })
+
+                    let msg = `Product with invoce no. ${product.Invoice_no} successfully inserted.`
+                    successData.push(msg)
+                } catch (error){
+                    // console.log('e',error)
+                }
+                
+            }
+            
         }
 
 
@@ -425,6 +440,7 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
             success : successData
         })
 
+
     } catch(error){
         console.log('error', error)
         res.send(error)
@@ -432,3 +448,4 @@ router.post('/uploadCsv', multerUpload.single('file'),async (req,res) => {
 })
 
 export default router
+
