@@ -1,4 +1,5 @@
 import readline from 'readline'
+// const readline = require('readline')
 
 //interface to read input user from terminal
 const rl = readline.createInterface({
