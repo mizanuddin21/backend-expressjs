@@ -90,3 +90,11 @@ To run the code, use your terminal and run command :
     node algorithm.js
   </pre>
 </div>
+If you are using JS module type, u can change the code below :
+<div class="code-container">
+  <pre id="command-text">
+    // import readline from 'readline' -> comment this
+    const readline = require('readline') -> use this instead
+  </pre>
+</div>
+
