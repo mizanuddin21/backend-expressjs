@@ -12,6 +12,7 @@ router.post('/create', async (req,res) => {
          * first, validate the request body of API
          */
         const schemaReq = Joi.object({
+            product_id: Joi.number().required(),
             item_name: Joi.string().required(),
             total_cost_of_goods_sold: Joi.number().positive().required(),
             total_price_sold : Joi.number().positive().required(),
@@ -27,10 +28,11 @@ router.post('/create', async (req,res) => {
         } else {
             // request body successfully validated
             // Extract validated data from the request body
-            const { item_name, total_cost_of_goods_sold, total_price_sold, quantity } = value
+            const { product_id,item_name, total_cost_of_goods_sold, total_price_sold, quantity } = value
             
             const result = await db('products')
             .insert({
+                product_id,
                 item_name,
                 total_cost_of_goods_sold,
                 total_price_sold,
