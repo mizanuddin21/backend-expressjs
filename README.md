@@ -50,6 +50,35 @@ Ensure you have PostgreSQL running locally. You can use a database management to
   </pre>
 </div>
 
+- Create a table:
+To make sure the backend service works, you need to create tables that run for this backend. Open your SQL tools or similar tools, and then run this query:
+<div class="code-container">
+  <pre id="command-text">
+     -- Create Table Products
+        CREATE TABLE products (
+            id SERIAL PRIMARY KEY,  -- Auto-incrementing primary key
+            item_name TEXT NOT NULL CHECK (length(item_name) >= 5),  -- Item name (min length 5)
+            quantity INT NOT NULL CHECK (quantity >= 1),  -- Quantity (min value 1)
+            total_cost_of_goods_sold NUMERIC NOT NULL CHECK (total_cost_of_goods_sold >= 0),  -- Cost of goods sold (min value 0)
+            total_price_sold NUMERIC NOT NULL CHECK (total_price_sold >= 0)  -- Total price sold (min value 0)
+        );
+     -- Create Table Invoice
+        CREATE TABLE invoice (
+            id SERIAL PRIMARY KEY,  -- Auto-incrementing primary key
+            invoice_no TEXT NOT NULL CHECK (length(invoice_no) >= 1),  -- Invoice number (min length 1)
+            date DATE NOT NULL,  -- Invoice date
+            customer_name TEXT NOT NULL CHECK (length(customer_name) >= 2),  -- Customer name (min length 2)
+            salesperson_name TEXT NOT NULL CHECK (length(salesperson_name) >= 2),  -- Salesperson name (min length 2)
+            payment_type TEXT NOT NULL CHECK (payment_type IN ('CASH', 'CREDIT')),  -- Payment type enum
+            notes TEXT CHECK (length(notes) >= 5),  -- Optional notes (min length 5)
+            product_id INT NOT NULL REFERENCES products(id) ON DELETE CASCADE,  -- List of products sold (foreign key referencing products)
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for record creation
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp for record update
+        );
+
+  </pre>
+</div>
+
 - Set Up Environment Variables: Create a .env file in the root directory of the project to configure database connection settings. Example:
 <div class="code-container">
   <pre id="command-text">
