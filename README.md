@@ -53,6 +53,7 @@ Ensure you have PostgreSQL running locally. You can use a database management to
 - Set Up Environment Variables: Create a .env file in the root directory of the project to configure database connection settings. Example:
 <div class="code-container">
   <pre id="command-text">
+    PORT=your_port -> for localhost port
     DB_HOST=localhost
     DB_PORT=5432
     DB_USER=your_postgres_user
