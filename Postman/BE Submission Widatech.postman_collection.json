@@ -1,0 +1,1277 @@
+{
+	"info": {
+		"_postman_id": "3401ab17-04d8-4b49-89bb-690a4f1d4f55",
+		"name": "BE Submission Widatech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29799384"
+	},
+	"item": [
+		{
+			"name": "Product get data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url_widatech}}/product/getData?size=4&page=1",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"product",
+						"getData"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "4"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Product",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/product/getData?size=4&page=1",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"product",
+								"getData"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "4"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "482"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e2-9hYnWsjHnQeIrpIkFanorHaDxDE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 06:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"item_name\": \"Gaming Laptop\",\n        \"quantity\": 5,\n        \"total_cost_of_goods_sold\": \"90000000\",\n        \"total_price_sold\": \"112500000\"\n    },\n    {\n        \"id\": 2,\n        \"item_name\": \"Wireless Mouse\",\n        \"quantity\": 15,\n        \"total_cost_of_goods_sold\": \"4500000\",\n        \"total_price_sold\": \"6750000\"\n    },\n    {\n        \"id\": 3,\n        \"item_name\": \"Mechanical Keyboard\",\n        \"quantity\": 10,\n        \"total_cost_of_goods_sold\": \"12000000\",\n        \"total_price_sold\": \"18000000\"\n    },\n    {\n        \"id\": 4,\n        \"item_name\": \"Gaming Monitor\",\n        \"quantity\": 7,\n        \"total_cost_of_goods_sold\": \"31500000\",\n        \"total_price_sold\": \"42000000\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Product create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"product_id\" : 1,\r\n    \"item_name\": \"Screwdriver\",\r\n\t\"total_cost_of_goods_sold\" : 45000,\r\n\t\"total_price_sold\": 60000,\r\n\t\"quantity\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_widatech}}/product/create",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"product",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"item_name\": \"Screwdriver\",\r\n\t\"total_cost_of_goods_sold\" : 45000,\r\n\t\"total_price_sold\": 60000,\r\n\t\"quantity\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/product/create",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"product",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b-UGU0PmHHpwjYtifssqnoRNnQk2g\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 06:55:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Data successfully inserted."
+				}
+			]
+		},
+		{
+			"name": "Invoice create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"invoice_no\" : \"INV001\",\r\n\t\"date\" : \"2024-12-15\",\r\n\t\"customer_name\": \"CUST_NEW_1\",\r\n\t\"salesperson_name\" : \"SALES_NEW_1\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"NESSS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_widatech}}/invoice/create",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"invoice",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Invoice Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : \"INV014\",\r\n\t\"date\" : \"2024-12-15\",\r\n\t\"customer_name\": \"CUST_NEW_1\",\r\n\t\"salesperson_name\" : \"SALES_NEW_1\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"NESSS\",\r\n\t\"product_id\" : 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/create",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-ZAhEbRIECrHuc16ZnDxAcLPvbHM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 06:55:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "Data successfully inserted for invoice: INV014"
+				},
+				{
+					"name": "Create Invoice Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : null,\r\n\t\"date\" : \"2024-12-15\",\r\n\t\"customer_name\": \"CUST_NEW_1\",\r\n\t\"salesperson_name\" : \"SALES_NEW_1\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"NESSS\",\r\n\t\"product_id\" : 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/create",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"create"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e-IjtYwb3FCJzCiSv/Vn+xLWVL0Qc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:03:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"ERROR\",\n    \"message\": \"\\\"invoice_no\\\" must be a string\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Invoice get data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_widatech}}/invoice/getData?date=2021-01-01&size=2&page=1",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"invoice",
+						"getData"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2021-01-01"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Invoice Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/getData?date=2024-12-19&size=2&page=1",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"getData"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-12-19"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-pF3iSIATFzcUMqP9aq/nUQrucOc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:05:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"ERROR\",\n    \"message\": \"\\\"size\\\" must be a number\"\n}"
+				},
+				{
+					"name": "Get Invoice Record Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/getData?date=2024-12-19&size=2&page=1",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"getData"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-12-19"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-IZEOcZYsjMmPMFVjPc0QO6QGDTA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:09:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"SUCCESS\",\n    \"message\": \"Records not found.\"\n}"
+				},
+				{
+					"name": "Get Invoice Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/getData?date=2024-12-15&size=2&page=1",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"getData"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-12-15"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "922"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"39a-NslfiIU/T6Jv4Oc6//svxWbSv3o\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:11:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"SUCCESS\",\n    \"message\": \"Data successfully fetched\",\n    \"data\": {\n        \"total_cash_transactions\": \"36000000\",\n        \"total_profit\": \"12000000\",\n        \"details\": [\n            {\n                \"id\": 16,\n                \"invoice_no\": \"INV013\",\n                \"date\": \"2024-12-14T17:00:00.000Z\",\n                \"customer_name\": \"CUST_NEW_1\",\n                \"salesperson_name\": \"SALES_NEW_1\",\n                \"payment_type\": \"CASH\",\n                \"notes\": \"NESSS\",\n                \"product_id\": 6,\n                \"created_at\": \"2024-12-15T06:52:20.442Z\",\n                \"updated_at\": \"2024-12-15T06:52:20.442Z\",\n                \"item_name\": \"Gaming Headset\",\n                \"quantity\": 8,\n                \"total_price_sold\": \"18000000\",\n                \"total_cost_of_goods_sold\": \"12000000\",\n                \"profit\": \"6000000\"\n            },\n            {\n                \"id\": 18,\n                \"invoice_no\": \"INV014\",\n                \"date\": \"2024-12-14T17:00:00.000Z\",\n                \"customer_name\": \"CUST_NEW_1\",\n                \"salesperson_name\": \"SALES_NEW_1\",\n                \"payment_type\": \"CASH\",\n                \"notes\": \"NESSS\",\n                \"product_id\": 6,\n                \"created_at\": \"2024-12-15T07:01:51.343Z\",\n                \"updated_at\": \"2024-12-15T07:01:51.343Z\",\n                \"item_name\": \"Gaming Headset\",\n                \"quantity\": 8,\n                \"total_price_sold\": \"18000000\",\n                \"total_cost_of_goods_sold\": \"12000000\",\n                \"profit\": \"6000000\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Invoice update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"date\" : \"2024-12-11\",\r\n\t\"customer_name\": \"CUST6\",\r\n\t\"salesperson_name\" : \"SALES6\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"CHANGED FOR UPDATE QUERY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url_widatech}}/invoice/update/INV001",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"invoice",
+						"update",
+						"INV001"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Invoice Bad Request",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : null,\r\n\t\"date\" : \"2024-12-11\",\r\n\t\"customer_name\": \"CUST6\",\r\n\t\"salesperson_name\" : \"SALES6\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"CHANGED FOR UPDATE QUERY\",\r\n\t\"product_id\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/update/2",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"update",
+								"2"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e-IjtYwb3FCJzCiSv/Vn+xLWVL0Qc\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:12:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"ERROR\",\n    \"message\": \"\\\"invoice_no\\\" must be a string\"\n}"
+				},
+				{
+					"name": "Internal server error",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : \"INV006\",\r\n\t\"date\" : \"2024-12-11\",\r\n\t\"customer_name\": \"CUST6\",\r\n\t\"salesperson_name\" : \"SALES6\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"CHANGED FOR UPDATE QUERY\",\r\n\t\"product_id\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/update/200",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"update",
+								"200"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34-pn106QvFhrqLmPXmMIccHJ/asRE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:18:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Failed to update data into the database.\"\n}"
+				},
+				{
+					"name": "Update Invoice Record Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : \"INV006\",\r\n\t\"date\" : \"2024-12-11\",\r\n\t\"customer_name\": \"CUST6\",\r\n\t\"salesperson_name\" : \"SALES6\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"CHANGED FOR UPDATE QUERY\",\r\n\t\"product_id\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/update/200",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"update",
+								"200"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f-Ijhe/uvYwFrvRlqM36HpzrgPKCQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:20:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"ERROR\",\n    \"message\": \"Record not found\"\n}"
+				},
+				{
+					"name": "Update Invoice Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"invoice_no\" : \"INV006\",\r\n\t\"date\" : \"2024-12-11\",\r\n\t\"customer_name\": \"CUST6\",\r\n\t\"salesperson_name\" : \"SALES6\",\r\n\t\"payment_type\" : \"CASH\",\r\n\t\"notes\" :\"CHANGED FOR UPDATE QUERY\",\r\n\t\"product_id\" : 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/update/2",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"update",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "336"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"150-YWY+3ekdg1q5O2lgWxzURWdfeRw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:21:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"SUCCESS\",\n    \"message\": \"Data successfully updated\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"invoice_no\": \"INV006\",\n            \"date\": \"2024-12-10T17:00:00.000Z\",\n            \"customer_name\": \"CUST6\",\n            \"salesperson_name\": \"SALES6\",\n            \"payment_type\": \"CASH\",\n            \"notes\": \"CHANGED FOR UPDATE QUERY\",\n            \"product_id\": 4,\n            \"created_at\": \"2024-12-14T13:51:50.644Z\",\n            \"updated_at\": \"2024-12-14T13:51:50.644Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Invoice delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url_widatech}}/invoice/delete?invoice_no=6",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"invoice",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "invoice_no",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Invoice Record Not Found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/delete?invoice_no=11111",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "invoice_no",
+									"value": "11111"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "47"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2f-Ijhe/uvYwFrvRlqM36HpzrgPKCQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:24:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"ERROR\",\n    \"message\": \"Record not found\"\n}"
+				},
+				{
+					"name": "Delete Invoice Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/delete?invoice_no=INV014",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "invoice_no",
+									"value": "INV014"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"51-UkpM82g7E8NMg7pKnsLG+rsTbyQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 07:24:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"SUCCESS\",\n    \"message\": \"Data successfully deleted for invoice no. INV014\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Invoice xlsx file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/mizan/Downloads/InvoiceImport-2.xlsx"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url_widatech}}/invoice/uploadCsv",
+					"host": [
+						"{{base_url_widatech}}"
+					],
+					"path": [
+						"invoice",
+						"uploadCsv"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Invoice Upload Duplicate Record",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mizan/Downloads/XLSX_template.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/uploadCsv",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"uploadCsv"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "238"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ee-9VWXKH4J5UtZ1raiyq3mm8e6pms\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 08:18:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"failed\": [\n        \"Invoice no. INV011 already exist in database. Invoice no. duplicated\",\n        \"Invoice no. INV012 already exist in database. Invoice no. duplicated\",\n        \"Invoice no. INV013 already exist in database. Invoice no. duplicated\"\n    ],\n    \"success\": []\n}"
+				},
+				{
+					"name": "Invoice Upload Bad request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mizan/Downloads/XLSX_template.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/uploadCsv",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"uploadCsv"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34-YyqaBArtnniawDatV2BIgeKMXhQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 08:20:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"XLSX file is required\"\n}"
+				},
+				{
+					"name": "Invoice Upload Success Partial",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mizan/Downloads/XLSX_template.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/uploadCsv",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"uploadCsv"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "214"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d6-QnEnd6tQpLkaBvqE17pIHkUYeho\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 08:21:59 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"failed\": [\n        \"Invoice no. INV014 already exist in database. Invoice no. duplicated\",\n        \"Invoice no. INV016 using product id '400' that does not exist in table. \"\n    ],\n    \"success\": [\n        \"Invoice no. INV015 successfully inserted.\"\n    ]\n}"
+				},
+				{
+					"name": "Invoice Upload success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/mizan/Downloads/InvoiceImport-2.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_widatech}}/invoice/uploadCsv",
+							"host": [
+								"{{base_url_widatech}}"
+							],
+							"path": [
+								"invoice",
+								"uploadCsv"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "552"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"228-n2/Q6alJTJNbwxNXW7YstzklnAA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 15 Dec 2024 11:01:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"failed\": [\n        \"Invoice no. 2 already exist in database. Invoice no. duplicated\"\n    ],\n    \"success\": [\n        \"Invoice no. 1 successfully inserted.\",\n        \"Invoice no. 2 successfully inserted.\",\n        \"Invoice no. 3 successfully inserted.\",\n        \"Invoice no. 6 successfully inserted.\",\n        \"Product with invoce no. 1 successfully inserted.\",\n        \"Product with invoce no. 1 successfully inserted.\",\n        \"Product with invoce no. 2 successfully inserted.\",\n        \"Product with invoce no. 3 successfully inserted.\",\n        \"Product with invoce no. 3 successfully inserted.\",\n        \"Product with invoce no. 6 successfully inserted.\"\n    ]\n}"
+				}
+			]
+		}
+	]
+}
