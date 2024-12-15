@@ -54,26 +54,26 @@ Ensure you have PostgreSQL running locally. You can use a database management to
 To make sure the backend service works, you need to create tables that run for this backend. Open your SQL tools or similar tools, and then run this query:
 <div class="code-container">
   <pre id="command-text">
-     -- Create Table Products
-        CREATE TABLE products (
-            id SERIAL PRIMARY KEY,  -- Auto-incrementing primary key
-            item_name TEXT NOT NULL CHECK (length(item_name) >= 5),  -- Item name (min length 5)
-            quantity INT NOT NULL CHECK (quantity >= 1),  -- Quantity (min value 1)
-            total_cost_of_goods_sold NUMERIC NOT NULL CHECK (total_cost_of_goods_sold >= 0),  -- Cost of goods sold (min value 0)
-            total_price_sold NUMERIC NOT NULL CHECK (total_price_sold >= 0)  -- Total price sold (min value 0)
-        );
      -- Create Table Invoice
         CREATE TABLE invoice (
-            id SERIAL PRIMARY KEY,  -- Auto-incrementing primary key
-            invoice_no TEXT NOT NULL CHECK (length(invoice_no) >= 1),  -- Invoice number (min length 1)
-            date DATE NOT NULL,  -- Invoice date
-            customer_name TEXT NOT NULL CHECK (length(customer_name) >= 2),  -- Customer name (min length 2)
-            salesperson_name TEXT NOT NULL CHECK (length(salesperson_name) >= 2),  -- Salesperson name (min length 2)
-            payment_type TEXT NOT NULL CHECK (payment_type IN ('CASH', 'CREDIT')),  -- Payment type enum
-            notes TEXT CHECK (length(notes) >= 5),  -- Optional notes (min length 5)
-            product_id INT NOT NULL REFERENCES products(id) ON DELETE CASCADE,  -- List of products sold (foreign key referencing products)
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- Timestamp for record creation
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp for record update
+            invoice_no TEXT NOT NULL CHECK (length(invoice_no) >= 1),  -- Invoice number, must be at least 1 character
+            date DATE NOT NULL,  -- Date of the invoice
+            customer_name TEXT NOT NULL CHECK (length(customer_name) >= 2),  -- Customer name, must be at least 2 characters
+            salesperson_name TEXT NOT NULL CHECK (length(salesperson_name) >= 2),  -- Salesperson name, must be at least 2 characters
+            payment_type TEXT NOT NULL CHECK (payment_type IN ('CASH', 'CREDIT')),  -- Payment type, can be either "CASH" or "CREDIT"
+            notes TEXT,  -- Notes, optional, but if present must be at least 5 characters
+            CONSTRAINT notes_min_length CHECK (length(notes) >= 5 OR notes IS NULL),  -- Optional notes field with a min length of 5
+            PRIMARY KEY (invoice_no)
+        );
+     -- Create Table Product
+        CREATE TABLE products (
+            product_id SERIAL PRIMARY KEY,  -- Auto-generated ID for each product sold
+            invoice_no TEXT NOT NULL,  -- Link each product to an invoice
+            item_name TEXT NOT NULL CHECK (length(item_name) >= 5),  -- Item name, must be at least 5 characters
+            quantity INT NOT NULL CHECK (quantity >= 1),  -- Quantity sold, must be at least 1
+            total_cost_of_goods_sold NUMERIC NOT NULL CHECK (total_cost_of_goods_sold >= 0),  -- Total cost of goods sold, must be at least 0
+            total_price_sold NUMERIC NOT NULL CHECK (total_price_sold >= 0),  -- Total price sold, must be at least 0
+            FOREIGN KEY (invoice_no) REFERENCES invoice2(invoice_no) ON DELETE CASCADE  -- Link to the invoices table
         );
 
   </pre>
